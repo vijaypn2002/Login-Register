@@ -1,0 +1,148 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ interviewer }}'s Candidates</title>
+    <style>
+        /* Company theme styles */
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+             /* Adjusted padding for header */
+            margin: 0;
+            padding-bottom: 50px; /* Adjusted padding for footer */
+            color: #333; /* Dark text color */
+        }
+        /* Header style */
+        header {
+            background-color: #044f81; /* Company primary color */
+            color: #fff; /* White text color */
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 20px; /* Added margin at the bottom */
+            position: relative; /* Added position relative for logo positioning */
+        }
+        .logo {
+    width: 250px; /* Adjust logo width as needed */
+    margin-right: 10px; /* Add margin to separate logo from text */
+    position: absolute; /* Position logo relative to its container */
+    top: 50%; /* Align logo vertically in the middle */
+    transform: translateY(-50%); /* Adjust for vertical alignment */
+    left: 20px; /* Adjust left position */
+    filter: brightness(0) invert(1); /* Make the logo white */
+}
+        /* Table style */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        /* Download button style */
+        #downloadBtn {
+            background-color: #044f81; /* Updated to match company theme */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        /* Download button hover style */
+        #downloadBtn:hover {
+            background-color: #00284e;
+        }
+        /* Footer style */
+        footer {
+            background-color: #044f81; /* Company primary color */
+            color: #fff; /* White text color */
+            text-align: center;
+            padding: 20px 0;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            z-index: 999; /* Ensure footer stays on top */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="{% static 'candidates/logoo.png' %}" alt="Hire-Pro Logo" class="logo">
+    <h1>{{ interviewer }}'s Candidates</h1>
+</header>
+
+<div style="text-align: right; margin-bottom: 20px;">
+    <button id="downloadBtn">Download Excel</button>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Select</th>
+            <th>Name</th>
+            <th>Job Title</th>
+            <th>Notice Period</th>
+            <th>Mode of Interview</th>
+            <th>Stage</th>
+            <th>Sub Stage</th>
+            <th>Source</th>
+            <th>Position Status</th>
+            <th>Location</th>
+            <th>Interview Status</th>
+            <th>Interview Date</th>
+            <th>Interviewer</th>
+            <th>Resume</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for candidate in candidates %}
+        <tr>
+            <td><input type="checkbox" name="selectedCandidates" value="{{ candidate.id }}"></td>
+            <td>{{ candidate.name }}</td>
+            <td>{{ candidate.job_title }}</td>
+            <td>{{ candidate.notice_period }}</td>
+            <td>{{ candidate.mode_of_interview }}</td>
+            <td>{{ candidate.stage }}</td>
+            <td>{{ candidate.sub_stage }}</td>
+            <td>{{ candidate.source }}</td>
+            <td>{{ candidate.position_status }}</td>
+            <td>{{ candidate.location }}</td>
+            <td>{{ candidate.interview_status }}</td>
+            <td>{{ candidate.interview_date }}</td>
+            <td>{{ candidate.interviewer }}</td>
+            <td><a href="{{ candidate.resume.url }}">{{ candidate.resume.name }}</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#downloadBtn").click(function() {
+            // Construct URL for downloading Excel file
+            var interviewer = "{{ interviewer }}";
+            var downloadUrl = "{% url 'download_candidates_excel' %}?interviewer=" + encodeURIComponent(interviewer);
+            // Open download URL in a new tab
+            window.open(downloadUrl, '_blank');
+        });
+    });
+</script>
+
+<footer>
+    <p>&copy; 2024 All rights reserved with Learnfluence Education Private Limited</p>
+</footer>
+
+</body>
+</html>

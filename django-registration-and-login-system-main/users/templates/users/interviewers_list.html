@@ -1,0 +1,176 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interviewers List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Reset CSS */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4; /* Light gray background */
+            color: #333; /* Dark text color */
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+            margin: 0;
+            padding: 0;
+            min-height: 100vh; /* Ensure page height is at least viewport height */
+        }
+
+        /* Header */
+        header {
+            background-color: #044f81; /* Company primary color */
+            color: #fff; /* White text color */
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            width: 250px; /* Adjust as needed */
+            filter: brightness(0) invert(1); /* Make the logo white */
+        }
+
+        .header-content {
+            margin: 0 auto;
+            max-width: 600px; /* Adjust as needed */
+        }
+
+        header h1 {
+            margin-bottom: 10px;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        header p {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #fefefe; /* Company secondary color */
+            padding: 45px 15px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #044f81; /* Dark blue link color */
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            padding: 15px 30px; /* Increased padding */
+            border: 2px solid #044f81; /* Dark blue border */
+            border-radius: 10px; /* Rounded corners */
+            background-color: transparent;
+            font-size: 18px; /* Increased font size */
+        }
+
+        nav ul li a:hover {
+            color: #fff; /* White text color on hover */
+            background-color: #044f81; /* Dark blue background on hover */
+        }
+
+        /* Main content */
+        main {
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 50px; /* Adjust to make space for footer */
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #044f81; /* Dark blue heading color */
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            text-align: left; /* Align buttons to the left */
+        }
+
+        li {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        /* Button style */
+        .interviewer-button {
+            display: block;
+            width: 200px; /* Set a fixed width for all buttons */
+            padding: 10px;
+            background-color: #044f81;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin: 0 auto 10px; /* Center buttons horizontally with bottom margin */
+        }
+
+        .interviewer-button:hover {
+            background-color: #033b5d;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #044f81; /* Company primary color */
+            color: #fff; /* White text color */
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            z-index: 999; /* Ensure footer stays on top */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="{% static 'candidates/logoo.png' %}" alt="Hire-Pro Logo" class="logo">
+        <div class="header-content">
+            <h1>Hiring Team</h1>
+            <p>Streamline your hiring process with our advanced ATS platform.</p>
+        </div>
+    </header>
+    
+    <main>
+        <h1>Interviewers</h1>
+        <ul>
+            {% for interviewer in interviewers %}
+                <li><a href="{% url 'interviewer_candidates' interviewer=interviewer %}" class="interviewer-button">{{ interviewer }}</a></li>
+            {% endfor %}
+        </ul>
+    </main>
+
+    <footer>
+        <p>Copyright © 2024 All rights reserved with Learnfluence Education Private Limited</p>
+    </footer>
+</body>
+</html>

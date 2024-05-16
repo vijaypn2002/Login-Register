@@ -1,0 +1,119 @@
+<!-- login_page.html -->
+{% extends "users/base.html" %}
+{% block title %} Login Page {% endblock title%}
+{% block content %}
+    <style>
+        /* Custom Styles */
+
+        .card-header.bg-yellow {
+            background-color: #FFD700; /* Yellow */
+        }
+
+        .text-blue {
+            color: #0000FF; /* Blue */
+        }
+
+        .btn-github {
+            background-color: #333; /* GitHub color */
+            color: #fff; /* White text */
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-github:hover {
+            background-color: #24292e; /* Darker GitHub color on hover */
+        }
+
+        
+        .btn-google {
+            background-color: #DB4437; /* Google color */
+            color: #fff; /* White text */
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-google:hover {
+            background-color: #c1351b; /* Darker Google color on hover */
+        }
+
+        .btn-login {
+            background-color: #FFA500; /* Orange */
+            color: #fff; /* White text */
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-login:hover {
+            background-color: #FF8C00; /* Darker orange on hover */
+        }
+    </style>
+    <div class="form-content my-3 p-3">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <div class="card shadow-lg border-0 rounded-lg mt-0 mb-3">
+                        
+                        {% if form.errors %}
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <div id="form_errors">
+                                    {% for key, value in form.errors.items %}
+                                        <strong>{{ value }}</strong>
+                                    {% endfor %}
+                                </div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endif %}
+                        <div class="card-body">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <div class="form-row">
+                                    <div class="col-md-10 offset-md-1">
+                                        <div class="form-group">
+                                            
+                                            <a href="{% url 'social:begin' 'google-oauth2' %}"
+                                                   class="btn btn-link btn-lg active btn-block btn-google">Sign in with Google</a>
+                                            <hr>
+                                            <p class="text-center"><strong>OR</strong></p>
+                                            <hr>
+                                            <label class="small mb-1 text-blue">Username</label>
+                                            {{ form.username }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-10 offset-md-1">
+                                        <div class="form-group">
+                                          <label class="small mb-1 text-blue">Password</label>
+                                          {{ form.password }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-10 offset-md-1">
+                                        <div class="form-group">
+                                            <!-- Add a Remember me functionality -->
+                                            {{ form.remember_me }}
+                                            <label class="text-blue"> Remember me</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-10 offset-md-1">
+                                        <div class="form-group mt-0 mb-1">
+                                          <button name="login" class="col-md-12 btn btn-dark btn-login" id="login">Sign in</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer text-center">
+                            <div class="small">
+                                <a href="{% url 'users-register' %}" class="text-blue">Don't have an account yet? Go to signup</a><br>
+                                <a href="{% url 'password_reset' %}" class="text-blue"><i>Forgot Password?</i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+{% endblock content %}

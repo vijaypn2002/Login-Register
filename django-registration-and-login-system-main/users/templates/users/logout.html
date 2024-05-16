@@ -1,0 +1,56 @@
+{% extends "users/base.html" %}
+{% block title %}Logout{% endblock title %}
+{% block content %}
+<style>
+    /* Custom Styles */
+
+    .card-header.bg-yellow {
+        background-color: #FFD700; /* Yellow */
+    }
+
+    .text-blue {
+        color: #0000FF; /* Blue */
+    }
+
+    .btn-github {
+        background-color: #333; /* GitHub color */
+        color: #fff; /* White text */
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-github:hover {
+        background-color: #24292e; /* Darker GitHub color on hover */
+    }
+
+    .btn-google {
+        background-color: #DB4437; /* Google color */
+        color: #fff; /* White text */
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-google:hover {
+        background-color: #c1351b; /* Darker Google color on hover */
+    }
+
+    .btn-login {
+        background-color: #FFA500; /* Orange */
+        color: #fff; /* White text */
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-login:hover {
+        background-color: #FF8C00; /* Darker orange on hover */
+    }
+</style>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+        <h5 class="card-title">You have been logged out</h5>
+        <p class="card-text">
+            Thanks for your time, contact me for any comments or suggestions using my email address.
+        </p>
+        <br><hr><a href="{% url 'login' %}" class="btn btn-primary">Sign in again</a>
+        </div>
+    </div>
+
+
+{% endblock content %}
