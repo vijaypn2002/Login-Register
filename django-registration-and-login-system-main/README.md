@@ -8,7 +8,6 @@
 * Remember me – Cookie Option, users don’t have to provide credentials every time they hit the site
 * Forgot Password – Users can easily retrieve their password if they forget it 
 * Admin Panel – admin can CRUD users
-
 ### Quick Start
 To get this project up and running locally on your computer follow the following steps.
 1. Set up a python virtual environment
